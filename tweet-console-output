@@ -1,0 +1,42 @@
+$ sbt console
+
+scala> Tweet.run()
+0    [run-main] DEBUG com.thinkaurelius.titan.diskstorage.util.ConfigHelper  - Set rid: 0x7f000101393035304073747564696f
+7    [run-main] DEBUG com.thinkaurelius.titan.diskstorage.astyanax.AstyanaxStorageManager  - About to instantiate class public com.netflix.astyanax.retry.BoundedExponentialBackoff(int,int,int) with 3 arguments
+39   [run-main] DEBUG com.thinkaurelius.titan.diskstorage.astyanax.AstyanaxStorageManager  - Instantiated RetryPolicy object BoundedExponentialBackoff[maxSleepTimeMs=***] from config string "com.netflix.astyanax.retry.BoundedExponentialBackoff,25,1000,30"
+184  [run-main] INFO  com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager  - Registering mbean: com.netflix.MonitoredResources:type=ASTYANAX,name=TitanConnectionPool,ServiceType=connectionpool
+329  [run-main] DEBUG com.thinkaurelius.titan.diskstorage.astyanax.AstyanaxStorageManager  - Creating keyspace titan...
+859  [run-main] DEBUG com.thinkaurelius.titan.diskstorage.astyanax.AstyanaxStorageManager  - Created keyspace titan
+1767 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.locking.LocalLockMediators  - Local lock mediator instantiated for namespace com.thinkaurelius.titan.diskstorage.astyanax.AstyanaxStorageManager:titan:edgestore
+2417 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.locking.LocalLockMediators  - Local lock mediator instantiated for namespace com.thinkaurelius.titan.diskstorage.astyanax.AstyanaxStorageManager:titan:propertyindex
+Opened graph
+3496 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+3948 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.util.OrderedKeyColumnValueIDManager  - Acquired ID block [1,100001) on partition 1 (my rid is 7f000101393035304073747564696f)
+3948 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.idassigner.StandardIDPool  - [1] Next/Max ID: [1, 100001]
+4283 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.util.OrderedKeyColumnValueIDManager  - Acquired ID block [1,51) on partition 2 (my rid is 7f000101393035304073747564696f)
+4283 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.idassigner.StandardIDPool  - [2] Next/Max ID: [1, 51]
+4284 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.idassigner.StandardIDPool  - Starting id block renewal thread upon 1
+4290 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+4312 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+4317 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+4321 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.StandardTitanGraph  - Saving transaction. Added 9, removed 0
+4428 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.locking.LockingTransactionHandle  - About to sleep for 87 ms
+4519 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+4522 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+4525 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+Set up schema
+4611 [Thread-10] DEBUG com.thinkaurelius.titan.diskstorage.util.OrderedKeyColumnValueIDManager  - Acquired ID block [51,101) on partition 2 (my rid is 7f000101393035304073747564696f)
+4612 [Thread-10] DEBUG com.thinkaurelius.titan.graphdb.database.idassigner.StandardIDPool  - Finishing id renewal thread
+4850 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.util.OrderedKeyColumnValueIDManager  - Acquired ID block [1,10001) on partition 0 (my rid is 7f000101393035304073747564696f)
+4851 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.idassigner.StandardIDPool  - [0] Next/Max ID: [1, 10001]
+4857 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.StandardTitanGraph  - Saving transaction. Added 2, removed 0
+Added userId=u1
+4890 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+4892 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+5154 [run-main] DEBUG com.thinkaurelius.titan.graphdb.database.StandardTitanGraph  - Saving transaction. Added 3003, removed 0
+5178 [run-main] DEBUG com.thinkaurelius.titan.diskstorage.locking.LockingTransactionHandle  - About to sleep for 79 ms
+5260 [run-main] DEBUG com.netflix.astyanax.thrift.ThriftConverter  - 
+Filled graph with tweets
+1) edges = List()
+2) count = 0
+3) edges = List()

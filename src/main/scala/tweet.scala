@@ -12,15 +12,18 @@ object Tweet {
     conf.setProperty("storage.backend","cassandra")
     conf.setProperty("storage.hostname","127.0.0.1")
     val g = TitanFactory.open(conf)
+    println("Opened graph")
 
     g.createKeyIndex("userId", classOf[Vertex])
     val timeType = g.makeType.name("time").simple.functional(false).dataType(classOf[JInteger]).makePropertyKey()
     g.makeType.name("tweets").primaryKey(timeType).makeEdgeLabel()
     g.stopTransaction(SUCCESS)
+    println("Set up schema")
 
     val u = g.addVertex(null)
     u.setProperty("userId", "u1")
     g.stopTransaction(SUCCESS)
+    println("Added userId=u1")
 
     def createTweet(user: Vertex, text: String, time: Int): (Edge, Vertex) = {
       val tweet = g.addVertex(null)
@@ -37,6 +40,7 @@ object Tweet {
 
     fillWithTweets("u1")
     g.stopTransaction(SUCCESS)
+    println("Filled graph with tweets")
 
     val user = g.getVertices("userId", "u1").head
     val edges = user.query.labels("tweets").limit(10).edges.map(_.getProperty("time"))
