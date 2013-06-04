@@ -32,7 +32,7 @@ object CreateTweets extends App with TitanProvider {
   g.commit()
   println("Added userId=u1")
 
-  def createTweet(user: Vertex, text: String, time: Int): (Edge, Vertex) = {
+  def createTweet(user: Vertex, text: String, time: JLong): (Edge, Vertex) = {
     val tweet = g.addVertex(null)
     tweet.setProperty("text", text)
     val edge = g.addEdge(null, user, tweet, "tweets")
@@ -55,7 +55,15 @@ Print text of the n most-recent tweets for a specific user
 */
 object QueryTweets extends App with TitanProvider {
   val user = g.getVertices("userId", "u1").head
-  user.query.labels("tweets").limit(10).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)
+
+  val count1 = 10
+  println("%d most-recent tweets:" format count1)
+  user.query.labels("tweets").limit(count1).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)
+
+  val count2 = 10
+  val last: JLong = -991
+  println("%d most-recent tweets older than %d: " format (count2, last))
+  user.query.labels("tweets").has("time", last, GREATER_THAN).limit(count2).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)  
 
   val count = user.query.labels("tweets").count
   println("count = " + count)
