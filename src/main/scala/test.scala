@@ -1,4 +1,4 @@
-package com.pongr.titantest
+/*package com.pongr.titantest
 
 import com.thinkaurelius.titan.core._
 import scala.collection.JavaConversions._
@@ -13,3 +13,4 @@ object Main {
     for (v <- g.getVertices) println(v)
   }
 }
+*/
