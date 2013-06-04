@@ -53,15 +53,13 @@ object CreateTweets extends App with TitanProvider {
 object QueryTweets extends App with TitanProvider {
   val user = g.getVertices("userId", "u1").head
 
-  val count1 = 10
-  println("%d most-recent tweets:" format count1)
-  user.query.labels("tweets").limit(count1).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)
+  val count = 10
+  println("%d most-recent tweets:" format count)
+  user.query.labels("tweets").limit(count).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)
 
-  val count2 = 10
-  val last: JLong = -991
-  println("%d most-recent tweets older than %d: " format (count2, last))
-  user.query.labels("tweets").has("time", last, GREATER_THAN).limit(count2).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)  
+  g.commit() //without this, the next query returns 0 tweets
 
-  val count = user.query.labels("tweets").count
-  println("count = " + count)
+  val last = 991
+  println("%d most-recent tweets older than %d: " format (count, last))
+  user.query.labels("tweets").has("time", -last: JLong, GREATER_THAN).limit(count).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)
 }
