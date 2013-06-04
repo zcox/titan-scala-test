@@ -14,6 +14,12 @@ trait TitanProvider {
   println("Opened graph")
 }
 
+/*
+User[userId] -- tweets[time] --> Tweet[text]
+
+Graph index on userId property for fast user vertex lookups
+Vertex index on time property of tweets edges for fast "n most-recent tweets" queries
+*/
 object CreateTweets extends App with TitanProvider {
   g.makeType().name("userId").unique(OUT).dataType(classOf[String]).indexed(classOf[Vertex]).makePropertyKey()
   val timeType = g.makeType().name("time").unique(OUT).dataType(classOf[JLong]).makePropertyKey()
@@ -44,6 +50,9 @@ object CreateTweets extends App with TitanProvider {
   println("Filled graph with tweets")
 }
 
+/*
+Print text of the n most-recent tweets for a specific user
+*/
 object QueryTweets extends App with TitanProvider {
   val user = g.getVertices("userId", "u1").head
   user.query.labels("tweets").limit(10).vertices.map(_.getProperty("text").asInstanceOf[String]).foreach(println)
