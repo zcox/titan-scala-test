@@ -50,9 +50,6 @@ object CreateTweets extends App with TitanProvider {
   println("Filled graph with tweets")
 }
 
-/*
-Print text of the n most-recent tweets for a specific user
-*/
 object QueryTweets extends App with TitanProvider {
   val user = g.getVertices("userId", "u1").head
 
